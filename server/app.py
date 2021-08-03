@@ -11,7 +11,7 @@ from botocore.exceptions import ClientError
 logger.setLevel(logging.DEBUG)
 
 PathLike = Union[Path, str]
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
 app = FastAPI()
 
 @app.get("/")
@@ -20,7 +20,7 @@ def get_root():
 
 def update_count(current_count, dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource('dynamodb')
+        dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
 
     table = dynamodb.Table('names')
     response = table.put_item(
@@ -34,7 +34,7 @@ def update_count(current_count, dynamodb=None):
 
 def get_count(dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource('dynamodb')
+        dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
     
     table = dynamodb.Table('names')
 
@@ -48,5 +48,7 @@ def get_count(dynamodb=None):
 @app.get("/count")
 def count():
     count = get_count(dynamodb)
-    update_count(count+1)
+    if not count:
+        count = 0
+    update_count(count+1, dynamodb)
     return {"Current Count": count}
