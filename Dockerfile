@@ -6,14 +6,8 @@ RUN apt-get update -qq \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD requirements.txt /root/
-
-RUN pip3 install -r /root/requirements.txt --no-cache-dir
-
-ADD . /root/textbookanalysis/
-
-WORKDIR /root/textbookanalysis/
-
-EXPOSE 3000
-
-# CMD [ "uvicorn", "server.app:app", "--host=0.0.0.0" "--port=${PORT:-5000}" ]
+WORKDIR /textbookanalysis
+COPY . /textbookanalysis
+RUN pip install -r requirements.txt
+EXPOSE 5000
+CMD ["uvicorn", "server.app:app", "--host", "0.0.0.0", "--port", "5000"]
