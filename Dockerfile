@@ -18,4 +18,4 @@ WORKDIR /root/textbookanalysis/
 
 EXPOSE 3000
 
-CMD [ "uvicorn", "src.app:app", "--host=0.0.0.0" "--port=${PORT:-5000}" ]
+CMD [ "uvicorn", "server.app:app", "--host=0.0.0.0" "--port=${PORT:-5000}" ]
