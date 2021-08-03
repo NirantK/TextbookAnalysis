@@ -39,7 +39,7 @@ def get_count(dynamodb=None):
     table = dynamodb.Table('names')
 
     try:
-        response = table.get_item(Key={'id': "1"})
+        response = table.query( KeyConditionExpression=Key("item").eq("count"))
     except ClientError as e:
         print(e.response['Error']['Message'])
     else:
