@@ -10,8 +10,6 @@ ADD requirements.txt /root/
 
 RUN pip3 install -r /root/requirements.txt --no-cache-dir
 
-RUN python -m spacy download en_core_web_sm
-
 ADD . /root/textbookanalysis/
 
 WORKDIR /root/textbookanalysis/
