@@ -1,5 +1,8 @@
 # TextbookAnalysis
 
+Download the Google Drive books from here: https://patratu.kvs.ac.in/sites/default/files/Gyan%20Kosh_2.pdf
+
+
 # Steps to setup Infra. [TO BE EDITED]
 
 1. `docker build -t fastapi:latest .`
